@@ -16,7 +16,7 @@ import java.util.Random;
  * @author Tobias
  */
 public class RandomPlayer implements BattleshipsPlayer {
-
+    private int turnNumber = 1;
     private final static Random rnd = new Random();
     private int sizeX;
     private int sizeY;
@@ -119,8 +119,8 @@ public class RandomPlayer implements BattleshipsPlayer {
     public Position getFireCoordinates(Fleet enemyShips) {
         int x = rnd.nextInt(sizeX);
         int y = rnd.nextInt(sizeY);
-        DA.append(""+x+","+y);
-
+        DA.append(turnNumber+","+x+","+y);
+        turnNumber++;
         return new Position(x, y);
     }
 
@@ -171,7 +171,7 @@ public class RandomPlayer implements BattleshipsPlayer {
 
         if(points>enemyPoints) DA.append(""+points+","+enemyPoints+",1",1);
         else DA.append(""+points+","+enemyPoints+",0",1);
-               
+        turnNumber = 1;       
        
         //Do nothing endgame stuff here
     }
