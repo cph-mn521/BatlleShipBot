@@ -1,0 +1,27 @@
+
+
+
+Domain Knowledge:
+
+Deterministisk spil. DVS, at der er et begrænset antal moves, og et begrænset antal placeringer. i vores tilfælde er banen 10x10. dvs at spillet er Garanteret slut efter 100 træk.
+
+Spillet har et minimums antal træk. givet ved Sum(n) hvor N er Skib_n antal felter.
+
+
+Data:
+
+Skibes Placering, og rotation. Dig
+Skibes Placering,og rotation. modstander. ER nok ikke tilgængelig.
+tur for tur træk, for dig.
+Index for Hit.
+tur for tur træk, for modstanderen.
+Index for hit.
+Won Game varible? 
+
+Random variable vi kan fjerne igen.
+Enemy turn time
+Sum af coordinater
+HP left.
+
+
+
