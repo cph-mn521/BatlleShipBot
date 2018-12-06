@@ -109,6 +109,7 @@ public class DataAcessor {
             writer.flush();
             writer.close();
         } catch (IOException e) {
+            e.printStackTrace();
         }
     }
     
@@ -119,7 +120,7 @@ public class DataAcessor {
             writer.flush();
             writer.close();
         } catch (IOException e) {
-            
+            e.printStackTrace();
         }
         
     }
@@ -130,7 +131,7 @@ public class DataAcessor {
             writer.flush();
             writer.close();
         } catch (IOException e) {
-            
+            e.printStackTrace();
         }
         
     }
