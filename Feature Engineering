@@ -10,7 +10,9 @@ since they will not happen at the same time, or have a turn shift. The game will
 We have decided to assign our datas into blocks, that we combine to represent a game.
 
 
-
+Upd 1.1:
+We decided to use enemy turn info, to try and improve ship placement. Added Data block to describe this.
+End Game block added, this will hopefully be used as a target variable for our ANN.
 
 
 BattleField block:
@@ -31,19 +33,28 @@ Turn Block:
 	Shot X 	, Shot Y 	,  Enemy HP 	, 	Hit
 	 int 	,	int 	, 	int 		, 	boolean (int either 1 or 0).
 
+Enemy Turn Block:
+		This block contains all info on enemy turn, Appears after Turn block, but before turn_n+1 block. this block will be repeated until the game is finished.
+	Enemy shot X 	, 	Enemy Shot Y 	, 	Player HP 	, 	Hit.
+		int	 		,	   int 			, 	   int 		, 	boolean (int either 1 or 0).
+
+Endgame Block:
+		Block containing end game data.
+	Player Points 	, 	Enemy Points 	, 	Won.
+	    int 		, 		int 		, 	boolean (int either 1 or 0).
 
 
 Functions called, And what data is extracted from each:
 
 
-public void startMatch(int rounds, Fleet ships, int sizeX, int sizeY);
+public void startMatch(int rounds, Fleet ships, int sizeX, int sizeY); Battlefield Block Extracted from this function.
 public void startRound(int round);
-public void placeShips(Fleet fleet, Board board);
-public void incoming(Position pos);
-public Position getFireCoordinates(Fleet enemyShips);
-public void hitFeedBack(boolean hit, Fleet enemyShips);
-public void endRound(int round, int points, int enemyPoints);
-public void endMatch(int won, int lost, int draw);
+public void placeShips(Fleet fleet, Board board); Ship placement Block extracted from here.
+public void incoming(Position pos);  Enemy turn block Extracted from here.
+public Position getFireCoordinates(Fleet enemyShips); Shot X and Shot y Extracted from here.
+public void hitFeedBack(boolean hit, Fleet enemyShips); Hit and total enemy HP extracted from here.
+public void endRound(int round, int points, int enemyPoints); Endgame Stats Extracted from here.
+public void endMatch(int won, int lost, int draw); 
 
 
 
