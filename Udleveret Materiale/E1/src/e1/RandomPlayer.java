@@ -35,18 +35,18 @@ public class RandomPlayer implements BattleshipsPlayer {
      */
     @Override
     public void startMatch(int rounds, Fleet ships, int sizeX, int sizeY) {
-        DA.newDataEntry();
+        
         this.sizeX = sizeX;
-        DA.append("" + sizeX);
+        
         this.sizeY = sizeY;
-        DA.append("" + sizeY);
+       
         nrOfShips = ships.getNumberOfShips();
-        DA.append("" + nrOfShips);
+        
         fleetblocks = 0;
         for (Ship ship : ships) {
             fleetblocks += ship.size();
         }
-        DA.append("" + fleetblocks);
+        DA.newDataEntry(""+sizeX + "," + sizeY  +","+nrOfShips+"," + fleetblocks);
     }
 
     /**
@@ -76,18 +76,16 @@ public class RandomPlayer implements BattleshipsPlayer {
                 int x = rnd.nextInt(sizeX);
                 int y = rnd.nextInt(sizeY - (s.size() - 1));
                 pos = new Position(x, y);
-                DA.append("" + x);
-                DA.append("" + y);
-                DA.append("1");
+                DA.append("" + x+","+y+"1");
             } else {
                 int x = rnd.nextInt(sizeX - (s.size() - 1));
                 int y = rnd.nextInt(sizeY);
                 pos = new Position(x, y);
-                DA.append("" + x);
-                DA.append("" + y);
-                DA.append("0");
+                DA.append("" + x+","+y+"0");
+
             }
             board.placeShip(pos, s, vertical);
+            
         }
     }
 
@@ -102,8 +100,8 @@ public class RandomPlayer implements BattleshipsPlayer {
     @Override
     public void incoming(Position pos) {
         
-        DA.append("e "+pos.x);
-        DA.append("e "+pos.y);
+        DA.append("e "+pos.x+",e "+pos.y);
+
         //Do nothing
     }
 
@@ -121,8 +119,8 @@ public class RandomPlayer implements BattleshipsPlayer {
     public Position getFireCoordinates(Fleet enemyShips) {
         int x = rnd.nextInt(sizeX);
         int y = rnd.nextInt(sizeY);
-        DA.append("m "+x);
-        DA.append("m "+y);
+        DA.append("m "+x+",m "+y);
+
         return new Position(x, y);
     }
 
@@ -153,11 +151,7 @@ public class RandomPlayer implements BattleshipsPlayer {
      */
     @Override
     public void startRound(int round) {
-        DA.newDataEntry();
-        DA.append("" + sizeX);
-        DA.append("" + sizeY);
-        DA.append("" + nrOfShips);
-        DA.append("" + fleetblocks);
+        DA.newDataEntry(""+sizeX + "," + sizeY  +","+nrOfShips+"," + fleetblocks);
     }
 
     /**
@@ -173,10 +167,10 @@ public class RandomPlayer implements BattleshipsPlayer {
     @Override
     public void endRound(int round, int points, int enemyPoints) {
         
-        DA.append(""+points);
-        DA.append(""+enemyPoints);
-        if(points>enemyPoints) DA.append("1",1);
-        else DA.append("0",1);
+        
+
+        if(points>enemyPoints) DA.append(""+points+","+enemyPoints+"1",1);
+        else DA.append(""+points+","+enemyPoints+"0",1);
                
        
         //Do nothing endgame stuff here

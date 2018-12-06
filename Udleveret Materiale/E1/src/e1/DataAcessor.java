@@ -102,10 +102,11 @@ public class DataAcessor {
      *
      */
     
-    public void newDataEntry(){
+    public void newDataEntry(String in){
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(FileName, true));
             writer.newLine();
+            writer.write(in+",");
             writer.flush();
             writer.close();
         } catch (IOException e) {
