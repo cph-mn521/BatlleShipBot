@@ -17,16 +17,15 @@ import tournament.player.PlayerFactory;
  *
  * @author Tobias
  */
-public class ExampleTournament
-{
-    public static void main(String[] args)
-    {
-        Loader loader = new Loader("C:\\Users\\Tobias\\EFIF\\OneDrive - EFIF\\CBA\\BattleShips\\BattleshipsV4");
+public class ExampleTournament {
+
+    public static void main(String[] args) {
+        Loader loader = new Loader("C:\\Users\\nille\\Dropbox\\Skole\\CPHBusiness - Datamatiker\\Projekter\\BatlleShipBot\\Udleveret Materiale");
         Collection<PlayerFactory<BattleshipsPlayer>> listOfAIs = new ArrayList<>();
         listOfAIs.add(loader.loadAI("E1\\dist\\E1.jar", "e1.E1"));
         listOfAIs.add(loader.loadAI("E2\\dist\\E2.jar", "e2.E2"));
         listOfAIs.add(loader.loadAI("X1\\dist\\X1.jar", "x1.X1"));
-        
+
         TextTournamentUI.turnOffIO();
         Tournament.run(Battleships.getGameFactory(), listOfAIs, true);
         TextTournamentUI.turnOnIO();
