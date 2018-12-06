@@ -20,14 +20,20 @@ import tournament.player.PlayerFactory;
 public class ExampleTournament {
 
     public static void main(String[] args) {
-        Loader loader = new Loader("C:\\Users\\nille\\Dropbox\\Skole\\CPHBusiness - Datamatiker\\Projekter\\BatlleShipBot\\Udleveret Materiale");
-        Collection<PlayerFactory<BattleshipsPlayer>> listOfAIs = new ArrayList<>();
-        listOfAIs.add(loader.loadAI("E1\\dist\\E1.jar", "e1.E1"));
-        listOfAIs.add(loader.loadAI("E2\\dist\\E2.jar", "e2.E2"));
-        listOfAIs.add(loader.loadAI("X1\\dist\\X1.jar", "x1.X1"));
+        int numberofplayers = 2; //number of random players for generating data.
 
+        Loader loader = new Loader("C:\\Users\\nille\\Dropbox\\Skole\\CPHBusiness - Datamatiker\\Projekter\\BatlleShipBot\\Udleveret Materiale");
+
+        Collection<PlayerFactory<BattleshipsPlayer>> listOfAIs = new ArrayList<>();
+
+        for (int i = 0; i < numberofplayers; i++) {
+            listOfAIs.add(loader.loadAI("E1\\dist\\E1.jar", "e1.E1"));
+        }
+
+        //listOfAIs.add(loader.loadAI("X1\\dist\\X1.jar", "x1.X1"));
         TextTournamentUI.turnOffIO();
         Tournament.run(Battleships.getGameFactory(), listOfAIs, true);
+
         TextTournamentUI.turnOnIO();
     }
 }
