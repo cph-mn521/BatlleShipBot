@@ -25,8 +25,8 @@ BattleField block:
 Ship Placement block: 
 		This block contains all the info on placing a ship onto the battlefield. this block will be used once pr. game
 	Features:
-		Ship Size 	, 	placement X 	,  	Placement Y 	,  	Rotation 	, 	Rekd.
-		    int  	,	   int 			, 		int 		, 	 0<int<2 	, 	boolean (int either 1 or 0) 
+		Ship Size 	, 	placement X 	,  	Placement Y 	,  	Rotation 					, 	Rekd.
+		    int  	,	   int 			, 		int 		, 	 boolean, 1 if vertical 	, 	boolean (int either 1 or 0) 
 
 Turn Block:
 		This block contains all info happening on a turn. where the ship shoots, if it hits, and how many total fields are left to hit. this block will be repeated until the game is finished.
