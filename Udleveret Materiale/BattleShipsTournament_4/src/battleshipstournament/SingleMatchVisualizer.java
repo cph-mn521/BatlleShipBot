@@ -8,26 +8,25 @@ import tournament.player.PlayerFactory;
  *
  * @author Tobias Grundtvig & Peter Lorensen
  */
-public class SingleMatchVisualizer
-{
-    public static void main(String[] args)
-    {
-        /*******  OVERWRITE AI HERE (with your own):  *******/
+public class SingleMatchVisualizer {
+
+    public static void main(String[] args) {
+        /**
+         * ***** OVERWRITE AI HERE (with your own):  ******
+         */
         //PlayerFactory<BattleshipsPlayer> playerAFactory = Loader.loadPlayer("D:\\BattleshipsTest\\R4.jar", "r4.R4");
-        PlayerFactory<BattleshipsPlayer> playerAFactory = Loader.loadPlayer("../AIjars/X10.jar", "x10.X10");
-        PlayerFactory<BattleshipsPlayer> playerBFactory = Loader.loadPlayer("../AIjars/E2.jar", "e2.E2");
-          
+        PlayerFactory<BattleshipsPlayer> playerAFactory = Loader.loadPlayer("../AIjars/E1.jar", "e1.E1");
+        PlayerFactory<BattleshipsPlayer> playerBFactory = Loader.loadPlayer("../AIjars/E1.jar", "e1.E1");
+
         runGame(playerAFactory, playerBFactory, 100);
     }
-    
-    public static void runGame(PlayerFactory<BattleshipsPlayer> playerA, PlayerFactory<BattleshipsPlayer> playerB, int rounds)
-    {
+
+    public static void runGame(PlayerFactory<BattleshipsPlayer> playerA, PlayerFactory<BattleshipsPlayer> playerB, int rounds) {
         //Initializing and getting the GameInstance that runs the game:
-        int[] ships = {2,3,3,4,5};
-        
+        int[] ships = {2, 3, 3, 4, 5};
+
         BattleshipGameInstanceVisual verbInstance = new BattleshipGameInstanceVisual(10, 10, ships);
-        verbInstance.run( playerA, playerB, rounds);  //Running the game 
+        verbInstance.run(playerA, playerB, rounds);  //Running the game
     }
-    
-    
+
 }
