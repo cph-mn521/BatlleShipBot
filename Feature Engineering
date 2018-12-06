@@ -3,10 +3,56 @@
 
 Domain Knowledge:
 
-Deterministisk spil. DVS, at der er et begrænset antal moves, og et begrænset antal placeringer. i vores tilfælde er banen 10x10. dvs at spillet er Garanteret slut efter 100 træk.
+The game is played by both players simoultaniusly. That means that we can ignore the enemy moves, and solely focus on our own.
+since they will not happen at the same time, or have a turn shift. The game will be played more on a high score basis than a turn to turn basis.
 
-Spillet har et minimums antal træk. givet ved Sum(n) hvor N er Skib_n antal felter.
 
+We have decided to assign our datas into blocks, that we combine to represent a game.
+
+
+
+
+
+BattleField block:
+		This block contains all the field information accesible. this block will be used once pr. game
+	Features:
+		X size 	,	y size 	, 	#Ships 	, Total ship blocks.
+	type: 
+		  int 	,	  int 	, 	 int 	, 		int
+
+Ship Placement block: 
+		This block contains all the info on placing a ship onto the battlefield. this block will be used once pr. game
+	Features:
+		Ship Size 	, 	placement X 	,  	Placement Y 	,  	Rotation 	, 	Rekd.
+		    int  	,	   int 			, 		int 		, 	 0<int<2 	, 	boolean (int either 1 or 0) 
+
+Turn Block:
+		This block contains all info happening on a turn. where the ship shoots, if it hits, and how many total fields are left to hit. this block will be repeated until the game is finished.
+	Shot X 	, Shot Y 	,  Enemy HP 	, 	Hit
+	 int 	,	int 	, 	int 		, 	boolean (int either 1 or 0).
+
+
+
+Functions called, And what data is extracted from each:
+
+
+public void startMatch(int rounds, Fleet ships, int sizeX, int sizeY);
+public void startRound(int round);
+public void placeShips(Fleet fleet, Board board);
+public void incoming(Position pos);
+public Position getFireCoordinates(Fleet enemyShips);
+public void hitFeedBack(boolean hit, Fleet enemyShips);
+public void endRound(int round, int points, int enemyPoints);
+public void endMatch(int won, int lost, int draw);
+
+
+
+
+
+
+
+
+considered features
 
 Data:
 
@@ -22,6 +68,3 @@ Random variable vi kan fjerne igen.
 Enemy turn time
 Sum af coordinater
 HP left.
-
-
-
