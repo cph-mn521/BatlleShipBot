@@ -19,6 +19,7 @@ import java.util.List;
  * @author Martin Wulff
  */
 public class DataAcessor {
+
     private final String FileName;
     private File fil;
 
@@ -39,7 +40,6 @@ public class DataAcessor {
      *
      * @throws delfinen.data.DataException
      */
-
     public List<String> getEntries() throws DataException {
         String line = null;
         List<String> Output = new ArrayList<>();
@@ -68,7 +68,6 @@ public class DataAcessor {
      * @throws DataException
      *
      */
-
     public List<String> searchEntries(String query) throws DataException {
         String line = null;
         List<String> matchingEntries = new ArrayList<>();
@@ -101,31 +100,31 @@ public class DataAcessor {
      * @throws DataException
      *
      */
-    
-    public void newDataEntry(String in){
+    public void newDataEntry(String in) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(FileName, true));
             writer.newLine();
-            writer.write(in+",");
+            writer.write(in + ",");
             writer.flush();
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    
+
     public void append(String in) {
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(FileName, true));
-            writer.write(in+",");
+            BufferedWriter writer = new BufferedWriter(new FileWriter(FileName, fil.exists()));
+            writer.write(in + ",");
             writer.flush();
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
     }
-    public void append(String in,int i) {
+
+    public void append(String in, int i) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(FileName, true));
             writer.write(in);
@@ -134,11 +133,9 @@ public class DataAcessor {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
     }
-    
-    
-    
+
     public void addEntry(String obj) throws DataException {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(FileName, fil.exists()));
@@ -160,14 +157,13 @@ public class DataAcessor {
      * @throws DataException
      *
      */
-
     public void editEntry(String old, String N) throws DataException {
         try {
             List<String> newFile = getEntries();
             String lines = "";
             BufferedWriter writer = new BufferedWriter(new FileWriter(FileName)); //Append when file exists, make when false
             for (String string : newFile) {
-                if (string.length()>7 && string.contains(old.substring(3, old.length()-3))) { //changed equals -> contains to handle compmembers
+                if (string.length() > 7 && string.contains(old.substring(3, old.length() - 3))) { //changed equals -> contains to handle compmembers
                     lines += N + "\r\n";
                 } else {
                     lines += string + "\r\n";
