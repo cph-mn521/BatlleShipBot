@@ -20,7 +20,7 @@ import tournament.player.PlayerFactory;
 public class ExampleTournament {
 
     public static void main(String[] args) {
-        int numberofplayers = 2; //number of random players for generating data.
+        int numberofplayers = 3; //number of random players for generating data.
 
         Loader loader = new Loader("C:\\Users\\nille\\Dropbox\\Skole\\CPHBusiness - Datamatiker\\Projekter\\BatlleShipBot\\Udleveret Materiale");
 
