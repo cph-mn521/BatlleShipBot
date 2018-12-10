@@ -22,12 +22,10 @@ public class RandomPlayer implements BattleshipsPlayer {
     private final static Random rnd = new Random();
     private int sizeX;
     private int sizeY;
-    private DataAcessor RoundData = new DataAcessor("Data.txt");
-    private DataAcessor ShipData = new DataAcessor("ShipData.txt");
+    private DataAcessor DA = new DataAcessor("Data.txt");
     private int fleetblocks;
     private int nrOfShips;
     private StringBuilder DATA;
-    private StringBuilder ShipDATA;
 
     public RandomPlayer() {
     }
@@ -74,23 +72,21 @@ public class RandomPlayer implements BattleshipsPlayer {
     public void placeShips(Fleet fleet, Board board) {
         for (int i = 0; i < fleet.getNumberOfShips(); ++i) {
             Ship s = fleet.getShip(i);
-            ShipDATA.append("").append(s.size());
+            DA.append("" + s.size());
             boolean vertical = rnd.nextBoolean();
             Position pos;
             if (vertical) {
                 int x = rnd.nextInt(sizeX);
                 int y = rnd.nextInt(sizeY - (s.size() - 1));
                 pos = new Position(x, y);
-                ShipDATA.append(",").append(x).append(",").append(y).append(",1");
+                DATA.append(",").append(x).append(",").append(y).append(",1");
             } else {
                 int x = rnd.nextInt(sizeX - (s.size() - 1));
                 int y = rnd.nextInt(sizeY);
                 pos = new Position(x, y);
-                ShipDATA.append(",").append(x).append(",").append(y).append(",0");
+                DATA.append(",").append(x).append(",").append(y).append(",0");
 
             }
-
-            ShipData.append(ShipDATA.toString());
             board.placeShip(pos, s, vertical);
 
         }
@@ -182,7 +178,7 @@ public class RandomPlayer implements BattleshipsPlayer {
         }
         turnNumber = 1;
         try {
-            RoundData.addEntry(DATA.toString());
+            DA.addEntry(DATA.toString());
             DATA = null;
 
         } catch (DataException e) {
