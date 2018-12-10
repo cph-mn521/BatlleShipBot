@@ -15,7 +15,12 @@ public class Horatio {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        String out = "";
+        for(int i =1; i<100; i++){
+            out += "Player turn"+ i + ", enemy turn" +i;
+        }
+        System.out.println(out);
+                
     }
     
 }
