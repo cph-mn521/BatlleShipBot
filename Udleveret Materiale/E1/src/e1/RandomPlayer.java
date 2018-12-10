@@ -10,14 +10,12 @@ import battleship.interfaces.Position;
 import battleship.interfaces.Board;
 import battleship.interfaces.Ship;
 import java.util.Random;
-import java.lang.StringBuilder;
 
 /**
  *
  * @author Tobias
  */
 public class RandomPlayer implements BattleshipsPlayer {
-
     private int turnNumber = 1;
     private final static Random rnd = new Random();
     private int sizeX;
@@ -25,7 +23,7 @@ public class RandomPlayer implements BattleshipsPlayer {
     private DataAcessor DA = new DataAcessor("Data.txt");
     private int fleetblocks;
     private int nrOfShips;
-    private StringBuilder DATA;
+    private String DATA ="";
 
     public RandomPlayer() {
     }
@@ -38,13 +36,13 @@ public class RandomPlayer implements BattleshipsPlayer {
      */
     @Override
     public void startMatch(int rounds, Fleet ships, int sizeX, int sizeY) {
-
+        
         this.sizeX = sizeX;
-
+        
         this.sizeY = sizeY;
-
+       
         nrOfShips = ships.getNumberOfShips();
-
+        
         fleetblocks = 0;
         for (Ship ship : ships) {
             fleetblocks += ship.size();
@@ -72,23 +70,24 @@ public class RandomPlayer implements BattleshipsPlayer {
     public void placeShips(Fleet fleet, Board board) {
         for (int i = 0; i < fleet.getNumberOfShips(); ++i) {
             Ship s = fleet.getShip(i);
-            DA.append("" + s.size());
+            DA.append(""+s.size());
             boolean vertical = rnd.nextBoolean();
             Position pos;
             if (vertical) {
                 int x = rnd.nextInt(sizeX);
                 int y = rnd.nextInt(sizeY - (s.size() - 1));
                 pos = new Position(x, y);
-                DATA.append(",").append(x).append(",").append(y).append(",1");
+                DATA+="," + x+","+y+",1";
             } else {
                 int x = rnd.nextInt(sizeX - (s.size() - 1));
                 int y = rnd.nextInt(sizeY);
                 pos = new Position(x, y);
-                DATA.append(",").append(x).append(",").append(y).append(",0");
+                DATA+="," + x+","+y+",0";
 
             }
             board.placeShip(pos, s, vertical);
-
+            
+            
         }
     }
 
@@ -102,8 +101,8 @@ public class RandomPlayer implements BattleshipsPlayer {
      */
     @Override
     public void incoming(Position pos) {
-
-        DATA.append(",").append(pos.x).append(",").append(pos.y);
+        
+        DATA+=","+pos.x+","+pos.y;
 
         //Do nothing
     }
@@ -122,7 +121,7 @@ public class RandomPlayer implements BattleshipsPlayer {
     public Position getFireCoordinates(Fleet enemyShips) {
         int x = rnd.nextInt(sizeX);
         int y = rnd.nextInt(sizeY);
-        DATA.append(",").append(turnNumber).append(",").append(x).append(",").append(y);
+        DATA+=","+turnNumber+","+x+","+y;
         turnNumber++;
         return new Position(x, y);
     }
@@ -140,11 +139,10 @@ public class RandomPlayer implements BattleshipsPlayer {
     @Override
     public void hitFeedBack(boolean hit, Fleet enemyShips) {
         if (hit) {
-            DATA.append(",1");
-        } else {
-            DATA.append(",0");
+           DATA+=",1"; 
         }
-
+        else DATA+=",0";
+        
         //Do nothing
     }
 
@@ -155,7 +153,7 @@ public class RandomPlayer implements BattleshipsPlayer {
      */
     @Override
     public void startRound(int round) {
-        DATA.append(sizeX).append(",").append(sizeY).append(",").append(nrOfShips).append(",").append(fleetblocks);
+        DATA+= sizeX + "," + sizeY  +","+nrOfShips+"," + fleetblocks;
     }
 
     /**
@@ -170,21 +168,21 @@ public class RandomPlayer implements BattleshipsPlayer {
      */
     @Override
     public void endRound(int round, int points, int enemyPoints) {
+        
+        
 
-        if (points > enemyPoints) {
-            DATA.append(",").append(points).append(",").append(enemyPoints).append(",1");
-        } else {
-            DATA.append(",").append(points).append(",").append(enemyPoints).append(",0");
-        }
-        turnNumber = 1;
-        try {
-            DA.addEntry(DATA.toString());
-            DATA = null;
+        if(points>enemyPoints) DATA+=","+points+","+enemyPoints+",1";
+        else DATA+=","+points+","+enemyPoints+",0";
+        turnNumber = 1;       
+       try{
+        DA.addEntry(DATA);
+        DATA = "";
 
-        } catch (DataException e) {
-            e.printStackTrace();
-        }
-
+       }
+       catch(DataException e){
+           e.printStackTrace();
+       }
+               
         //Do nothing endgame stuff here
     }
 
