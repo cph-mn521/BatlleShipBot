@@ -77,15 +77,16 @@ public class RandomPlayer implements BattleshipsPlayer {
                 int x = rnd.nextInt(sizeX);
                 int y = rnd.nextInt(sizeY - (s.size() - 1));
                 pos = new Position(x, y);
-                DATA+="," + x+","+y+"1";
+                DATA+="," + x+","+y+",1";
             } else {
                 int x = rnd.nextInt(sizeX - (s.size() - 1));
                 int y = rnd.nextInt(sizeY);
                 pos = new Position(x, y);
-                DATA+="," + x+","+y+"0";
+                DATA+="," + x+","+y+",0";
 
             }
             board.placeShip(pos, s, vertical);
+            
             
         }
     }
@@ -152,7 +153,7 @@ public class RandomPlayer implements BattleshipsPlayer {
      */
     @Override
     public void startRound(int round) {
-        DATA+="B"+sizeX + "," + sizeY  +","+nrOfShips+"," + fleetblocks+"B";
+        DATA+= sizeX + "," + sizeY  +","+nrOfShips+"," + fleetblocks;
     }
 
     /**
