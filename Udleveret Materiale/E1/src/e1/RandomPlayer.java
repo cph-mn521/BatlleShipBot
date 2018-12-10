@@ -89,8 +89,11 @@ public class RandomPlayer implements BattleshipsPlayer {
                 ShipDATA.append(",").append(x).append(",").append(y).append(",0");
 
             }
-
-            ShipData.append(ShipDATA.toString());
+            try {
+                ShipData.addEntry(ShipDATA.toString());
+            } catch (DataException e) {
+                e.printStackTrace();
+            }
             board.placeShip(pos, s, vertical);
 
         }
