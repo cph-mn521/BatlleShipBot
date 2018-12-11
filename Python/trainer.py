@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
-import matplotlib as plot
+#import matplotlib as plot
 import pandas as pd
-import numpy as nm
-import sklearn
-import scipy
+#import numpy as nm
+#import sklearn
+#import scipy
 import os
 
 # changes the path on the computerr
@@ -30,41 +30,61 @@ game_data = pd.read_csv(game_data_file)
 data_file_delimiter = ','
 
 # The max column count a line in the file could have
-largest_column_count = 0
+enemy_largest_column_count = 0
+own_largest_column_count = 0
 
 # Loop the data lines
 with open(enemy_shot_data_file, 'r') as enemy_shot_temp:
     # Read the lines
-    lines =enemy_shot_temp.readlines()
+    enemy_lines = enemy_shot_temp.readlines()    
     
-    for l in lines:
+    for l in enemy_lines:
         # Count the column count for the current line
-        column_count = len(l.split(data_file_delimiter)) + 1
+        enemy_column_count = len(l.split(data_file_delimiter))
 
         # Set the new most column count
-        largest_column_count = column_count if largest_column_count < column_count else largest_column_count
+        enemy_largest_column_count = enemy_column_count if enemy_largest_column_count < enemy_column_count else enemy_largest_column_count
 
+    
 # Close file
 enemy_shot_temp.close()
 
-# Generate column names (will be 0, 1, 2, ..., largest_column_count - 2)
-column_names = [i for i in range(0, largest_column_count -2)]
+enemy_column_names = [i for i in range(0, enemy_largest_column_count -1)]
 
-# Read the data
 enemy_shot_data = pd.read_csv(enemy_shot_data_file, 
                                       header=None,
-                                      names = column_names, 
+                                      names = enemy_column_names, 
                                       delimiter=data_file_delimiter, 
-                                      usecols = range(1,largest_column_count-1)
+                                      usecols = range(1,enemy_largest_column_count)
                                       ).fillna(0)
+
+with open(own_shot_data_file, 'r') as own_shot_temp:
+    #readlines
+    own_lines = own_shot_temp.readlines()
+
+for l in own_lines:
+        # Count columns for current line
+        own_column_count = len(l.split(data_file_delimiter))
+        
+        # Set hte new most column count
+        own_largest_column_count = own_column_count if own_largest_column_count < own_column_count else own_largest_column_count
+
+own_shot_temp.close()
+
+# Generate column names (will be 0, 1, 2, ..., largest_column_count)
+
+own_column_names = [i for i in range(0,own_largest_column_count)]
+
+# Read the data
+
 own_shot_data = pd.read_csv(own_shot_data_file, 
                             header= None, 
-                            names = column_names, 
+                            names = own_column_names, 
                             delimiter = data_file_delimiter
                             ).fillna(0)
 
-
-
-
 #cleans unwanted variables
-del [column_count, column_names, data_file_delimiter, l, lines, largest_column_count]
+del [own_column_count, own_column_names, own_largest_column_count, own_shot_data_file, own_lines, 
+     enemy_column_names, enemy_column_count, enemy_largest_column_count, enemy_shot_data_file, enemy_lines,
+     data_file_delimiter, l,
+     game_data_file, path]
