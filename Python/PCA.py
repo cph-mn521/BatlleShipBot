@@ -4,9 +4,7 @@ Created on Mon Dec 10 12:31:56 2018
 
 @author: Martin Wulff
 """
-import plotly.plotly as py
-from plotly.graph_objs import *
-import plotly.tools as tls
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import random as rd
@@ -20,8 +18,9 @@ data = input.split();
 data.split(",")
 Index = S[0]
 Data = data[1:,:];
-df = df.fillna(0)
-u, s, v = np.linalg.svd(np.transpose(df))
+df = game_data.as_matrix
+
+u, s, v = np.linalg.svd(game_data)
 
 
 u
@@ -40,25 +39,37 @@ tot = sum(s)
 var_exp = [(i / tot)*100 for i in sorted(s, reverse=True)]
 cum_var_exp = np.cumsum(var_exp)
 
-trace1 = Bar(
-        x=['PC %s' %i for i in range(1,5)],
-        y=var_exp,
-        showlegend=False)
+plt.bar(range(1,len(var_exp)+1),var_exp)
 
-trace2 = Scatter(
-        x=['PC %s' %i for i in range(1,5)], 
-        y=cum_var_exp,
-        name='cumulative explained variance')
 
-data = Data([trace1, trace2])
+#Projecting Data onto the first 3 principal components.
+vectors = v[0:2,:]
+Y = game_data.dot(np.transpose(vectors))
+fig = plt.figure()
+plt.scatter(Y[0],Y[1])
+plt.grid()
+plt.show()
 
-layout=Layout(
-        yaxis=YAxis(title='Explained variance in percent'),
-        title='Explained variance by different principal components')
 
-fig = Figure(data=data, layout=layout)
-py.iplot(fig)
 
-# Projection onto eigen subspace.
-W_mat = Data.dot(v[0:2])
+
+#PCA for own shot data.
+u, s, v = np.linalg.svd(own_shot_data)
+
+#Plot of eigenvalue and caputred variance
+tot = sum(s)
+var_exp = [(i / tot)*100 for i in sorted(s, reverse=True)]
+cum_var_exp = np.cumsum(var_exp)
+
+plt.bar(range(1,len(var_exp)+1),var_exp)
+
+
+#Projecting Data onto the first 3 principal components.
+vectors = v[0:2,:]
+Y = game_data.dot(np.transpose(vectors))
+fig = plt.figure()
+plt.scatter(Y[0],Y[1])
+plt.grid()
+plt.show()
+
 
