@@ -27,9 +27,9 @@ public class RandomPlayer implements BattleshipsPlayer {
     private DataAcessor SDA = new DataAcessor("ShipPlacement.txt");
     private int fleetblocks;
     private int nrOfShips;
-    private String DATA = "";
-    private String enemyShots = "";
-    private String ownShots = "";
+    private StringBuilder DATA = new StringBuilder();
+    private StringBuilder enemyShots = new StringBuilder();
+    private StringBuilder ownShots = new StringBuilder();
     private StringBuilder ShipData = new StringBuilder();
 
     public RandomPlayer() {
@@ -117,7 +117,7 @@ public class RandomPlayer implements BattleshipsPlayer {
         }
         try {
             SDA.addEntry(ShipData.toString());
-            DATA += ShipData.toString();
+            DATA.append(ShipData.toString());
         } catch (DataException e) {
             e.printStackTrace();
         }
@@ -134,9 +134,9 @@ public class RandomPlayer implements BattleshipsPlayer {
     @Override
     public void incoming(Position pos) {
         if (turnNumber == 1) {
-            enemyShots += pos.x + "," + pos.y;
+            enemyShots.append(pos.x).append(",").append(pos.y);
         } else {
-            enemyShots += "," + pos.x + "," + pos.y;
+            enemyShots.append(",").append(pos.x).append(",").append(pos.y);
         }
 
         //Do nothing
@@ -157,9 +157,9 @@ public class RandomPlayer implements BattleshipsPlayer {
         int x = rnd.nextInt(sizeX);
         int y = rnd.nextInt(sizeY);
         if (turnNumber == 1) {
-            ownShots += x + "," + y;
+            ownShots.append(x).append(",").append(y);
         } else {
-            ownShots += "," + x + "," + y;
+            ownShots.append(",").append(x).append(",").append(y);
         }
         turnNumber++;
         return new Position(x, y);
@@ -179,9 +179,9 @@ public class RandomPlayer implements BattleshipsPlayer {
     public void hitFeedBack(boolean hit, Fleet enemyShips
     ) {
         if (hit) {
-            ownShots += ",true";
+            ownShots.append(",true");
         } else {
-            ownShots += ",false";
+            ownShots.append(",false");
         }
 
         //Do nothing
@@ -195,7 +195,7 @@ public class RandomPlayer implements BattleshipsPlayer {
     @Override
     public void startRound(int round
     ) {
-        DATA += sizeX + "," + sizeY + "," + nrOfShips + "," + fleetblocks;
+        DATA.append(sizeX).append(",").append(sizeY).append(",").append(nrOfShips).append(",").append(fleetblocks);
     }
 
     /**
@@ -211,19 +211,19 @@ public class RandomPlayer implements BattleshipsPlayer {
     @Override
     public void endRound(int round, int points, int enemyPoints
     ) {
-        DATA += "," + points + "," + enemyPoints + "," + (points - enemyPoints);
+        DATA.append(",").append(points).append(",").append(enemyPoints).append(",").append(points - enemyPoints);
         turnNumber = 1;
         try {
-            DA.addEntry(DATA);
-            EDA.addEntry(enemyShots);
-            ODA.addEntry(ownShots);
+            DA.addEntry(DATA.toString());
+            EDA.addEntry(enemyShots.toString());
+            ODA.addEntry(ownShots.toString());
 
         } catch (DataException e) {
             e.printStackTrace();
         }
-        DATA = "";
-        enemyShots = "";
-        ownShots = "";
+        DATA = new StringBuilder();
+        enemyShots = new StringBuilder();
+        ownShots = new StringBuilder();
 
         //Do nothing endgame stuff here
     }
