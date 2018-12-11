@@ -83,6 +83,21 @@ own_shot_data = pd.read_csv(own_shot_data_file,
                             delimiter = data_file_delimiter
                             ).fillna(0)
 
+
+
+#standarized datasets
+from sklearn.preprocessing import StandardScaler
+sc = StandardScaler()
+enemy_shot_data_std = sc.fit_transform(enemy_shot_data)
+game_data_std = sc.fit_transform(game_data)
+own_shot_data_std = sc.fit_transform(own_shot_data)
+
+#normalized datasets
+from sklearn.preprocessing import normalize
+enemy_shot_data_nml = normalize(enemy_shot_data, axis = 0)
+own_shot_data_nml = normalize(own_shot_data, axis = 0)
+game_data_nml = normalize(game_data, axis = 0)
+
 #cleans unwanted variables
 del [own_column_count, own_column_names, own_largest_column_count, own_shot_data_file, own_lines, 
      enemy_column_names, enemy_column_count, enemy_largest_column_count, enemy_shot_data_file, enemy_lines,
