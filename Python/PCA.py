@@ -29,19 +29,6 @@ for i in range(0,len(results)):
         tiedgames.append(i)
 
 
-# Importing Data:
-input = pd.read_csv('Data.txt')
-data = input.split();
-data.split(",")
-Index = S[0]
-Data = data[1:,:];
-df = game_data.as_matrix
-
-
-
-
-
-
 
 #svd
 u, s, v = np.linalg.svd(game_data)
@@ -103,10 +90,10 @@ plt.show()
 
 #PCA forcombined data
 
-frames = [game_data,own_shot_data]
+
 DATA = pd.concat([game_data,own_shot_data],axis =1 )
-u, s, v = np.linalg.svd(frames)
-DATA=pd.DataFrame(frames)
+u, s, v = np.linalg.svd(DATA)
+
 
 #Plot of eigenvalue and caputred variance
 tot = sum(s)
@@ -117,6 +104,7 @@ plt.bar(range(1,len(var_exp)+1),var_exp)
 
 
 #Projecting Data onto the first 3 principal components.
+vectors = v[0:2,:]
 Y = DATA.dot(np.transpose(vectors))
 T1 = Y.loc[wongames]
 T2 = Y.loc[tiedgames]
@@ -132,8 +120,23 @@ plt.show()
 
 
 
+DATA_nm = np.concatenate((game_data_nml,own_shot_data_nml),axis=1)
+u, s, v = np.linalg.svd(DATA_nm)
+
+vectors = v[0:2,:]
+Y = DATA_nm.dot(np.transpose(vectors))
+T1 = Y[wongames]
+T2 = Y[tiedgames]
+T3 = Y[lostgames]
 
 
+fig = plt.figure()
+
+plt.scatter(T3[:,0],T3[:,1],color='blue')
+plt.scatter(T2[:,0],T2[:,1],color='green')
+plt.scatter(T1[:,0],T1[:,1],color='red')
+plt.grid()
+plt.show()
 
 
 
