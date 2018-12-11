@@ -103,10 +103,10 @@ plt.show()
 
 #PCA forcombined data
 
-frames = [game_data,ShotData]
-DATA = pd.concat(frames)
-u, s, v = np.linalg.svd(DATA)
-
+frames = [game_data,own_shot_data]
+DATA = pd.concat([game_data,own_shot_data],axis =1 )
+u, s, v = np.linalg.svd(frames)
+DATA=pd.DataFrame(frames)
 
 #Plot of eigenvalue and caputred variance
 tot = sum(s)
