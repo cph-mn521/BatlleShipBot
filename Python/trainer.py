@@ -21,26 +21,36 @@ enemy_shot_data_file = "EnemyShots.txt"
 
 # read data
 game_data = pd.read_csv(game_data_file)
-
-#Since data might be uneven.
 own_shot_data = pd.read_csv(own_shot_data_file,header = None)
-enemy_shot_data = pd.read_csv(enemy_shot_data_file, header = None)
 
+####Since enemy data is uneven:
 
+# Delimiter
+data_file_delimiter = ','
 
+# The max column count a line in the file could have
+largest_column_count = 0
 
-# Set the new most column count
-largest_column_count = column_count if largest_column_count < column_count else largest_column_count
+# Loop the data lines
+with open(enemy_shot_data_file, 'r') as temp_f:
+    # Read the lines
+    lines = temp_f.readlines()
+
+    for l in lines:
+        # Count the column count for the current line
+        column_count = len(l.split(data_file_delimiter)) + 1
+
+        # Set the new most column count
+        largest_column_count = column_count if largest_column_count < column_count else largest_column_count
 
 # Close file
 temp_f.close()
 
-
-
 # Generate column names (will be 0, 1, 2, ..., largest_column_count - 1)
 column_names = [i for i in range(0, largest_column_count)]
 
-# Read csv
-df = pd.read_csv(data_file, header=None, delimiter=data_file_delimiter, names=column_names)
-# print(df)
+# Read the data
+enemy_shot_data = pd.read_csv(enemy_shot_data_file, header=None, delimiter=data_file_delimiter, names=column_names)
 
+#cleans unnessecary variables
+del [column_count, column_names, data_file_delimiter, l, lines, largest_column_count]
