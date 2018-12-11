@@ -31,6 +31,7 @@ public class RandomPlayer implements BattleshipsPlayer {
     private StringBuilder enemyShots = new StringBuilder();
     private StringBuilder ownShots = new StringBuilder();
     private StringBuilder ShipData = new StringBuilder();
+    private StringBuilder emptyLineBuffer = new StringBuilder();
 
     public RandomPlayer() {
     }
@@ -47,7 +48,13 @@ public class RandomPlayer implements BattleshipsPlayer {
         this.sizeX = sizeX;
 
         this.sizeY = sizeY;
+        /*
+        int mapsize = sizeX * sizeY;
 
+        for (int i = 0; i < mapsize; i++) {
+            emptyLineBuffer.append(",,");
+        }
+         */
         nrOfShips = ships.getNumberOfShips();
 
         fleetblocks = 0;
@@ -79,24 +86,6 @@ public class RandomPlayer implements BattleshipsPlayer {
         String name = "";
         for (int i = 0; i < fleet.getNumberOfShips(); ++i) {
             Ship s = fleet.getShip(i);
-            /*
-            switch (s.size()) {
-                case 2:
-                    name = "Destroyer";
-                    break;
-                case 3:
-                    name = "Cruiser";
-                    break;
-                case 4:
-                    name = "Battleship";
-                    break;
-                case 5:
-                    name = "Carrier";
-                    break;
-            }
-
-            ShipData.append(name);
-             */
             ShipData.append(",").append(s.size());
 
             boolean vertical = rnd.nextBoolean();
@@ -133,13 +122,7 @@ public class RandomPlayer implements BattleshipsPlayer {
      */
     @Override
     public void incoming(Position pos) {
-        if (turnNumber == 1) {
-            enemyShots.append(pos.x).append(",").append(pos.y);
-        } else {
-            enemyShots.append(",").append(pos.x).append(",").append(pos.y);
-        }
-
-        //Do nothing
+        enemyShots.append(",").append(pos.x).append(",").append(pos.y);
     }
 
     /**
@@ -215,8 +198,16 @@ public class RandomPlayer implements BattleshipsPlayer {
         turnNumber = 1;
         try {
             DA.addEntry(DATA.toString());
-            EDA.addEntry(enemyShots.toString());
-            ODA.addEntry(ownShots.toString());
+            if (!enemyShots.toString().contains(",")) {
+                EDA.addEntry(",,");
+            } else {
+                EDA.addEntry(enemyShots.toString());
+            }
+            if (!ownShots.toString().contains(",")) {
+                ODA.addEntry(",,");
+            } else {
+                ODA.addEntry(ownShots.toString());
+            }
 
         } catch (DataException e) {
             e.printStackTrace();

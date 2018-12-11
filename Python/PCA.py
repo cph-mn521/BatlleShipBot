@@ -11,8 +11,11 @@ import numpy as np
 import pandas as pd
 import random as rd
 import os
-os.chdir("C:\\Users\\Martin Wulff\\Documents\\BattelShipBot\\BatlleShipBot\\Python")
 
+if "nille" not in os.getcwd():
+    os.chdir("C:\\Users\\Martin Wulff\\Documents\\BattelShipBot\\BatlleShipBot\\Python")
+else:
+    os.chdir("C:/Users/nille/Dropbox/Skole/CPHBusiness - Datamatiker/Projekter/BatlleShipBot/Udleveret Materiale/BattleShipsTournament_4")
 
 # Importing Data:
 input = pd.read_csv('Data.txt')
