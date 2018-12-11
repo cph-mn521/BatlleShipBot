@@ -105,12 +105,12 @@ public class RandomPlayer implements BattleshipsPlayer {
                 int x = rnd.nextInt(sizeX);
                 int y = rnd.nextInt(sizeY - (s.size() - 1));
                 pos = new Position(x, y);
-                ShipData.append(",").append(x).append(",").append(y).append(",true");
+                ShipData.append(",").append(x).append(",").append(y).append(",1");
             } else {
                 int x = rnd.nextInt(sizeX - (s.size() - 1));
                 int y = rnd.nextInt(sizeY);
                 pos = new Position(x, y);
-                ShipData.append(",").append(x).append(",").append(y).append(",false");
+                ShipData.append(",").append(x).append(",").append(y).append(",0");
 
             }
             board.placeShip(pos, s, vertical);
@@ -179,9 +179,9 @@ public class RandomPlayer implements BattleshipsPlayer {
     public void hitFeedBack(boolean hit, Fleet enemyShips
     ) {
         if (hit) {
-            ownShots.append(",true");
+            ownShots.append(",1");
         } else {
-            ownShots.append(",false");
+            ownShots.append(",0");
         }
 
         //Do nothing
