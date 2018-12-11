@@ -8,7 +8,7 @@ import scipy
 import os
 
 if "nille" not in os.getcwd():
-    path = "Martin indsæt din sti her."
+    path = "C:/Users/Martin Wulff/Documents/BattelShipBot/BatlleShipBot/Python"
 else:
     path = "C:/Users/nille/Dropbox/Skole/CPHBusiness - Datamatiker/Projekter/BatlleShipBot/Udleveret Materiale/BattleShipsTournament_4"
 
@@ -37,6 +37,8 @@ with open(data_file, 'r') as temp_f:
 
 # Close file
 temp_f.close()
+
+
 
 # Generate column names (will be 0, 1, 2, ..., largest_column_count - 1)
 column_names = [i for i in range(0, largest_column_count)]
