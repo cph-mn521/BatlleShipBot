@@ -7,37 +7,34 @@ import tournament.player.PlayerFactory;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Martin Wulff
  */
-public class Arh1 implements PlayerFactory<BattleshipsPlayer>{
-    public Arh1(){}
-    
+public class Arh1 implements PlayerFactory<BattleshipsPlayer> {
+
+    public Arh1() {
+    }
+
     @Override
-    public BattleshipsPlayer getNewInstance()
-    {
+    public BattleshipsPlayer getNewInstance() {
         return new Horatio();
     }
 
     @Override
-    public String getID()
-    {
-        return "E1";
+    public String getID() {
+        return "Y8";
     }
 
     @Override
-    public String getName()
-    {
-        return "Random player";
+    public String getName() {
+        return "Horatio";
     }
 
     @Override
-    public String[] getAuthors()
-    {
-        String[] res = {"Tobias Grundtvig", "Hans Hansen"};
+    public String[] getAuthors() {
+        String[] res = {"Niels Bang", "Martin Wulff"};
         return res;
     }
-    
+
 }

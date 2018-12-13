@@ -15,7 +15,9 @@ import org.nd4j.linalg.io.ClassPathResource;
  * @author Martin Wulff
  */
 public class Brain {
+
     private MultiLayerNetwork model;
+
     public void brain() {
         try {
             String simpleMlp = new ClassPathResource(
@@ -23,7 +25,7 @@ public class Brain {
             model = KerasModelImport.
                     importKerasSequentialModelAndWeights(simpleMlp);
         } catch (Exception e) {
-
+            System.out.println("Loading went wrong");
         }
 
     }
@@ -34,17 +36,17 @@ public class Brain {
         for (int i = 0; i < inputs; i++) {
             features.putScalar(new int[]{i}, something[i]);
         }
-        double [] output = model.output(features).toDoubleVector();
-        double highest=0;
+        double[] output = model.output(features).toDoubleVector();
+        double highest = 0;
         int indexH = -1;
         for (int i = 0; i < output.length; i++) {
-            if(output[i]>0 && output[i]>highest){
+            if (output[i] > 0 && output[i] > highest) {
                 highest = output[i];
-                indexH=i;
+                indexH = i;
             }
         }
         return indexH;
-        
+
     }
 
 }

@@ -23,10 +23,12 @@ import battleshipstournament.DataException;
 public class ExampleTournament {
 
     public static void main(String[] args) {
-        int numberofplayers = 2; //number of random players for generating data.
+        int numberofplayers = 1; //number of random players for generating data.
+
         int numberofships = 5;
         //Resets files
         File data = new File("Data.txt");
+        /*
         File enemyshots = new File("EnemyShots.txt");
         File ownshots = new File("OwnShots.txt");
         if (data.delete()) {
@@ -62,6 +64,7 @@ public class ExampleTournament {
         } catch (DataException e) {
             e.printStackTrace();
         }
+         */
         Loader loader;
         if (data.getAbsolutePath().contains("nille")) {
             loader = new Loader("C:\\Users\\nille\\Dropbox\\Skole\\CPHBusiness - Datamatiker\\Projekter\\BatlleShipBot\\Udleveret Materiale");
@@ -71,8 +74,10 @@ public class ExampleTournament {
 
         Collection<PlayerFactory<BattleshipsPlayer>> listOfAIs = new ArrayList<>();
 
+        listOfAIs.add(loader.loadAI("E2\\dist\\E2.jar", "e2.E2"));
+        listOfAIs.add(loader.loadAI("Y9.jar", "y9.Y9"));
         for (int i = 0; i < numberofplayers; i++) {
-            listOfAIs.add(loader.loadAI("E1\\dist\\E1.jar", "e1.E1"));
+            listOfAIs.add(loader.loadAI("E2\\dist\\E2.jar", "e2.E2"));
         }
 
         //listOfAIs.add(loader.loadAI("X1\\dist\\X1.jar", "x1.X1"));

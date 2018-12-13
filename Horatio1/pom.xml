@@ -43,14 +43,14 @@
       <version>1.0.0-beta2</version>
     </dependency>
     <dependency>
-      <groupId>bs</groupId>
-      <artifactId>Battleships_4</artifactId>
-      <version>4.0</version>
+      <groupId>Battleship_4</groupId>
+      <artifactId>Bs_4</artifactId>
+      <version>1.0</version>
     </dependency>
     <dependency>
-      <groupId>bs</groupId>
-      <artifactId>Tournament_4</artifactId>
-      <version>4.0</version>
+      <groupId>Tournament_4</groupId>
+      <artifactId>TM_4</artifactId>
+      <version>1.0</version>
     </dependency>
   </dependencies> 
 </project>

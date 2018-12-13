@@ -12,11 +12,11 @@ public class SingleMatchVisualizer {
 
     public static void main(String[] args) {
         /**
-         * ***** OVERWRITE AI HERE (with your own):  ******
+         * ***** OVERWRITE AI HERE (with your own): ******
          */
         //PlayerFactory<BattleshipsPlayer> playerAFactory = Loader.loadPlayer("D:\\BattleshipsTest\\R4.jar", "r4.R4");
-        PlayerFactory<BattleshipsPlayer> playerAFactory = Loader.loadPlayer("../AIjars/E1.jar", "e1.E1");
-        PlayerFactory<BattleshipsPlayer> playerBFactory = Loader.loadPlayer("../AIjars/E1.jar", "e1.E1");
+        PlayerFactory<BattleshipsPlayer> playerAFactory = Loader.loadPlayer("../AIjars/Y9.jar", "y9.Y9");
+        PlayerFactory<BattleshipsPlayer> playerBFactory = Loader.loadPlayer("../AIjars/E2.jar", "e2.E2");
 
         runGame(playerAFactory, playerBFactory, 100);
     }

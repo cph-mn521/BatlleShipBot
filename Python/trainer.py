@@ -8,8 +8,11 @@ import pandas as pd
 import os
 
 # changes the path on the computerr
-if "nille" not in os.getcwd():
+if "nille" and "Lord" not in os.getcwd():
     path = "C:/Users/Martin Wulff/Documents/BattelShipBot/BatlleShipBot/Python"
+
+elif "Lord" in os.getcwd():
+    path = "C:/Users/Lord/Documents/GitHub/BatlleShipBot/Udleveret Materiale/BattleShipsTournament_4"
 else:
     path = "C:/Users/nille/Dropbox/Skole/CPHBusiness - Datamatiker/Projekter/BatlleShipBot/Udleveret Materiale/BattleShipsTournament_4"
 

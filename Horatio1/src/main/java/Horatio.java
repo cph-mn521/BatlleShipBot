@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 
-
 import battleship.interfaces.BattleshipsPlayer;
 import tournament.player.PlayerFactory;
 import battleship.interfaces.Fleet;
@@ -12,11 +11,13 @@ import battleship.interfaces.Position;
 import battleship.interfaces.Board;
 import battleship.interfaces.Ship;
 import java.util.Random;
+
 /**
  *
  * @author Martin Wulff
  */
 public class Horatio implements BattleshipsPlayer {
+
     private int turnNumber = 1;
     private final static Random rnd = new Random();
     private int sizeX;
@@ -28,15 +29,16 @@ public class Horatio implements BattleshipsPlayer {
     private StringBuilder ownShots = new StringBuilder();
     private StringBuilder ShipData = new StringBuilder();
     private StringBuilder emptyLineBuffer = new StringBuilder();
-    
+
     private final Brain BigThink = new Brain();
     private ShipPlacer BoatsMan;
     private int[] Gameboard = new int[100];
     int pix;
-    public Horatio(){
-        
+
+    public Horatio() {
+
     }
-    
+
     /**
      * Called in the beginning of each match to inform about the number of
      * rounds being played.
@@ -83,15 +85,15 @@ public class Horatio implements BattleshipsPlayer {
      */
     @Override
     public void placeShips(Fleet fleet, Board board) {
-        new ShipPlacer(sizeX,sizeY);
+        BoatsMan = new ShipPlacer(sizeX, sizeY);
         ShipData = new StringBuilder();
         String name = "";
         for (int i = 0; i < fleet.getNumberOfShips(); ++i) {
             Ship s = fleet.getShip(i);
-            
+
             int[] placement = BoatsMan.placeShip(s.size());
             Position pos = new Position(placement[0], placement[1]);
-            
+
             board.placeShip(pos, s, BoatsMan.getvertical());
         }
 
@@ -174,7 +176,9 @@ public class Horatio implements BattleshipsPlayer {
     @Override
     public void endRound(int round, int points, int enemyPoints
     ) {
-        if(points>enemyPoints)System.out.println("Heeheee.");
+        if (points > enemyPoints) {
+            System.out.println("Heeheee.");
+        }
 
         //Do nothing endgame stuff here
     }
@@ -192,11 +196,11 @@ public class Horatio implements BattleshipsPlayer {
     ) {
         //Do nothing not of wurf to our data.
     }
-    
-    private int[] pixToCoordinates(int in){
+
+    private int[] pixToCoordinates(int in) {
         int[] out = new int[2];
-            out[0] = in%10+1;
-            out[1] =10-(int)(in/10);
+        out[0] = in % 10 + 1;
+        out[1] = 10 - (int) (in / 10);
         return out;
     }
 }

@@ -19,72 +19,60 @@ import tournament.player.PlayerFactory;
  *
  * @author Tobias Grundtvig
  */
-public class Loader
-{
+public class Loader {
+
     private final String rootPath;
 
-    public Loader(String rootPath)
-    {
+    public Loader(String rootPath) {
         this.rootPath = rootPath;
     }
-    
-    public Collection<PlayerFactory<BattleshipsPlayer>> loadCategory(String prefix, int size)
-    {
+
+    public Collection<PlayerFactory<BattleshipsPlayer>> loadCategory(String prefix, int size) {
         ArrayList<PlayerFactory<BattleshipsPlayer>> res = new ArrayList<>();
-        for(int i = 1; i <= size; ++i)
-        {
+        for (int i = 1; i <= size; ++i) {
             String jarFile = rootPath + "/" + prefix + i + ".jar";
             String className = prefix.toLowerCase() + i + "." + prefix + i;
             PlayerFactory<BattleshipsPlayer> player = loadPlayer(jarFile, className);
-            if(player != null)
-            {
+            if (player != null) {
                 System.out.println("Loaded: " + prefix + i + " -> " + player.getID() + ": " + player.getName());
                 res.add(player);
             }
         }
         return res;
     }
-    
-    public PlayerFactory<BattleshipsPlayer> loadAI(String jarFileName, String className)
-    {
+
+    public PlayerFactory<BattleshipsPlayer> loadAI(String jarFileName, String className) {
         String jarFile = rootPath + "/" + jarFileName;
         PlayerFactory<BattleshipsPlayer> player = loadPlayer(jarFile, className);
-        if(player == null)
-        {
+        if (player == null) {
             throw new RuntimeException("Could not load jar file: " + jarFile);
         }
         System.out.println("Loaded: " + jarFileName + ": ID:" + player.getID() + " Name:" + player.getName());
         return player;
     }
 
-    
-    public static PlayerFactory<BattleshipsPlayer> loadPlayer(String jar, String className)
-    {
+    public static PlayerFactory<BattleshipsPlayer> loadPlayer(String jar, String className) {
         PlayerFactory<BattleshipsPlayer> res = null;
-        try
-        {
+        try {
             addJar(jar);
             res = (PlayerFactory<BattleshipsPlayer>) Class.forName(className).newInstance();
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
+            System.out.println("this is where it fails");
             e.printStackTrace();
         }
         return res;
     }
 
-    private static void addJar(String s) throws Exception
-    {
+    private static void addJar(String s) throws Exception {
         File f = new File(s);
         URI u = f.toURI();
         URLClassLoader urlClassLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
         Class<URLClassLoader> urlClass = URLClassLoader.class;
-        Method method = urlClass.getDeclaredMethod("addURL", new Class[]
-        {
+        Method method = urlClass.getDeclaredMethod("addURL", new Class[]{
             URL.class
         });
         method.setAccessible(true);
-        method.invoke(urlClassLoader, new Object[]
-        {
+        method.invoke(urlClassLoader, new Object[]{
             u.toURL()
         });
     }
