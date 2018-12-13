@@ -14,7 +14,7 @@ targetSet = []
 InputData = np.zeros(100)
 
 def toVectorIndex(x,y,val,out):
-    out[(int(x)-1)*10+int(y)]=val
+    out[100-10*int(y)+int(x)-1]=val
     return
 
 
@@ -33,5 +33,3 @@ for i in range(0,2000-1):
             
             
         
-    
-    
