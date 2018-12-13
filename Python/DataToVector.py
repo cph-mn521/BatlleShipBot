@@ -33,3 +33,7 @@ for i in range(0,2000-1):
             
             
         
+def toCordinateIndex(i):
+    row = int(i%10)+1
+    collum =10-int((i/10))
+    return [row,collum]
