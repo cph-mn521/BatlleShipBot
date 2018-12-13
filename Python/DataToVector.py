@@ -14,12 +14,12 @@ targetSet = []
 InputData = np.zeros(100)
 
 def toVectorIndex(x,y,val,out):
-    out[100-10*int(y)+int(x)-1]=val
+    out[100-10*int(y+1)+int(x+1)-1]=val
     return
 
-
-for i in range(0,2000-1):
-    for j in range(2,300-1,3):
+a,b = own_shot_data.shape
+for i in range(0,a-1):
+    for j in range(2,b-1,3):
         if(own_shot_data[j][i]):
             for n in range(0,j-3,3):
                 if(own_shot_data[n+2][i]): toVectorIndex(own_shot_data[n][i],own_shot_data[n+1][i],1,InputData)
@@ -37,3 +37,7 @@ def toCordinateIndex(i):
     row = int(i%10)+1
     collum =10-int((i/10))
     return [row,collum]
+
+def f(x,y):
+    return 100-10*int(y)+int(x)-1
+    
