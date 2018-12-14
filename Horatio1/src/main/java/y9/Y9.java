@@ -1,3 +1,4 @@
+package y9;
 
 import battleship.interfaces.BattleshipsPlayer;
 import tournament.player.PlayerFactory;
@@ -11,9 +12,9 @@ import tournament.player.PlayerFactory;
  *
  * @author Martin Wulff
  */
-public class Arh1 implements PlayerFactory<BattleshipsPlayer> {
+public class Y9 implements PlayerFactory<BattleshipsPlayer> {
 
-    public Arh1() {
+    public Y9() {
     }
 
     @Override
@@ -23,7 +24,7 @@ public class Arh1 implements PlayerFactory<BattleshipsPlayer> {
 
     @Override
     public String getID() {
-        return "Y8";
+        return "Y9";
     }
 
     @Override

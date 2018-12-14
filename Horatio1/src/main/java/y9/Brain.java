@@ -1,3 +1,5 @@
+package y9;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -20,11 +22,10 @@ public class Brain {
 
     public void brain() {
         try {
-            String simpleMlp = new ClassPathResource(
-                    "Model.h5").getFile().getPath();
-            model = KerasModelImport.
-                    importKerasSequentialModelAndWeights(simpleMlp);
+            String simpleMlp = new ClassPathResource("Model.h5").getFile().getPath();
+            model = KerasModelImport.importKerasSequentialModelAndWeights(simpleMlp);
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("Loading went wrong");
         }
 
@@ -32,7 +33,7 @@ public class Brain {
 
     public int usebrain(int[] something) {
         int inputs = 100;
-        INDArray features = Nd4j.zeros(inputs);
+        INDArray features = org.nd4j.linalg.factory.Nd4j.zeros(inputs);
         for (int i = 0; i < inputs; i++) {
             features.putScalar(new int[]{i}, something[i]);
         }

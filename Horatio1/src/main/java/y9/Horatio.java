@@ -1,3 +1,5 @@
+package y9;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -5,10 +7,9 @@
  */
 
 import battleship.interfaces.BattleshipsPlayer;
-import tournament.player.PlayerFactory;
+import battleship.interfaces.Board;
 import battleship.interfaces.Fleet;
 import battleship.interfaces.Position;
-import battleship.interfaces.Board;
 import battleship.interfaces.Ship;
 import java.util.Random;
 
@@ -158,9 +159,9 @@ public class Horatio implements BattleshipsPlayer {
      * @param round int the current round number.
      */
     @Override
-    public void startRound(int round
-    ) {
+    public void startRound(int round) {
         Gameboard = new int[100];
+
     }
 
     /**
@@ -174,8 +175,7 @@ public class Horatio implements BattleshipsPlayer {
      * @param enemyPoints int enemy's points this round.
      */
     @Override
-    public void endRound(int round, int points, int enemyPoints
-    ) {
+    public void endRound(int round, int points, int enemyPoints) {
         if (points > enemyPoints) {
             System.out.println("Heeheee.");
         }
@@ -192,8 +192,7 @@ public class Horatio implements BattleshipsPlayer {
      * @param draw int the number of draws in this match.
      */
     @Override
-    public void endMatch(int won, int lost, int draw
-    ) {
+    public void endMatch(int won, int lost, int draw) {
         //Do nothing not of wurf to our data.
     }
 

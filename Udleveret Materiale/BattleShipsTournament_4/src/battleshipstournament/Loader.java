@@ -57,7 +57,6 @@ public class Loader {
             addJar(jar);
             res = (PlayerFactory<BattleshipsPlayer>) Class.forName(className).newInstance();
         } catch (Exception e) {
-            System.out.println("this is where it fails");
             e.printStackTrace();
         }
         return res;
